@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		7A3889FD2CC28F39007B4FA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3889FC2CC28F39007B4FA0 /* AppDelegate.swift */; };
 		7A3889FF2CC28F39007B4FA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3889FE2CC28F39007B4FA0 /* SceneDelegate.swift */; };
-		7A388A012CC28F39007B4FA0 /* PreBuiltUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A388A002CC28F39007B4FA0 /* PreBuiltUI.swift */; };
+		7A388A012CC28F39007B4FA0 /* PreAuthUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A388A002CC28F39007B4FA0 /* PreAuthUI.swift */; };
 		7A388A062CC28F3D007B4FA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A388A052CC28F3D007B4FA0 /* Assets.xcassets */; };
 		7A388A092CC28F3D007B4FA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A388A072CC28F3D007B4FA0 /* LaunchScreen.storyboard */; };
 		7A388A142CC28F3E007B4FA0 /* iwallpaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A388A132CC28F3E007B4FA0 /* iwallpaperTests.swift */; };
 		7A388A1E2CC28F3E007B4FA0 /* iwallpaperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A388A1D2CC28F3E007B4FA0 /* iwallpaperUITests.swift */; };
 		7A388A202CC28F3E007B4FA0 /* iwallpaperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A388A1F2CC28F3E007B4FA0 /* iwallpaperUITestsLaunchTests.swift */; };
+		7A3917E92CC41230003DBE40 /* CheckEmailUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3917E82CC41230003DBE40 /* CheckEmailUI.swift */; };
+		7A3917EB2CC41278003DBE40 /* LabelMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3917EA2CC41278003DBE40 /* LabelMiddleWare.swift */; };
+		7A3917ED2CC429F0003DBE40 /* TextfieldMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3917EC2CC429F0003DBE40 /* TextfieldMiddleWare.swift */; };
 		7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */; };
+		7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +43,7 @@
 		7A3889F92CC28F39007B4FA0 /* iwallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iwallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3889FC2CC28F39007B4FA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A3889FE2CC28F39007B4FA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7A388A002CC28F39007B4FA0 /* PreBuiltUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreBuiltUI.swift; sourceTree = "<group>"; };
+		7A388A002CC28F39007B4FA0 /* PreAuthUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAuthUI.swift; sourceTree = "<group>"; };
 		7A388A052CC28F3D007B4FA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A388A082CC28F3D007B4FA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A388A0A2CC28F3D007B4FA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +52,11 @@
 		7A388A192CC28F3E007B4FA0 /* iwallpaperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iwallpaperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A388A1D2CC28F3E007B4FA0 /* iwallpaperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iwallpaperUITests.swift; sourceTree = "<group>"; };
 		7A388A1F2CC28F3E007B4FA0 /* iwallpaperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iwallpaperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7A3917E82CC41230003DBE40 /* CheckEmailUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailUI.swift; sourceTree = "<group>"; };
+		7A3917EA2CC41278003DBE40 /* LabelMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelMiddleWare.swift; sourceTree = "<group>"; };
+		7A3917EC2CC429F0003DBE40 /* TextfieldMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldMiddleWare.swift; sourceTree = "<group>"; };
 		7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMiddleWare.swift; sourceTree = "<group>"; };
+		7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMiddleWare.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,23 @@
 			path = iwallpaperUITests;
 			sourceTree = "<group>";
 		};
+		7A3917E42CC4114F003DBE40 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7ACF02CC2CC470F20075C987 /* PreAuth */,
+				7A3917E52CC411FB003DBE40 /* LogIn */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7A3917E52CC411FB003DBE40 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				7A3917E82CC41230003DBE40 /* CheckEmailUI.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
 		7AC013172CC30844001322AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +163,7 @@
 		7AC013182CC3084B001322AC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7A388A002CC28F39007B4FA0 /* PreBuiltUI.swift */,
+				7A3917E42CC4114F003DBE40 /* Authentication */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,8 +188,19 @@
 			isa = PBXGroup;
 			children = (
 				7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */,
+				7A3917EA2CC41278003DBE40 /* LabelMiddleWare.swift */,
+				7A3917EC2CC429F0003DBE40 /* TextfieldMiddleWare.swift */,
+				7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */,
 			);
 			path = Middleware;
+			sourceTree = "<group>";
+		};
+		7ACF02CC2CC470F20075C987 /* PreAuth */ = {
+			isa = PBXGroup;
+			children = (
+				7A388A002CC28F39007B4FA0 /* PreAuthUI.swift */,
+			);
+			path = PreAuth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,10 +333,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A388A012CC28F39007B4FA0 /* PreBuiltUI.swift in Sources */,
+				7A388A012CC28F39007B4FA0 /* PreAuthUI.swift in Sources */,
 				7A3889FD2CC28F39007B4FA0 /* AppDelegate.swift in Sources */,
+				7A3917EB2CC41278003DBE40 /* LabelMiddleWare.swift in Sources */,
+				7A3917E92CC41230003DBE40 /* CheckEmailUI.swift in Sources */,
 				7A3889FF2CC28F39007B4FA0 /* SceneDelegate.swift in Sources */,
+				7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */,
 				7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */,
+				7A3917ED2CC429F0003DBE40 /* TextfieldMiddleWare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

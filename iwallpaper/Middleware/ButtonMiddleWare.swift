@@ -1,12 +1,5 @@
-//
-//  buttonMiddleWare.swift
-//  iwallpaper
-//
-//  Created by Selim on 19.10.2024.
-//
-
-import Foundation
 import UIKit
+
 
 class ButtonMiddleWare {
     
@@ -47,7 +40,8 @@ class ButtonMiddleWare {
             // Görsel boyutlarını ayarlayın
             NSLayoutConstraint.activate([
                 imageView.widthAnchor.constraint(equalToConstant: imageSize.width),
-                imageView.heightAnchor.constraint(equalToConstant: imageSize.height)
+                imageView.heightAnchor.constraint(equalToConstant: imageSize.height),
+               
             ])
             
             stackView.addArrangedSubview(imageView)
@@ -62,21 +56,24 @@ class ButtonMiddleWare {
         
         stackView.addArrangedSubview(titleLabel)
         button.addSubview(stackView)
+
+        // Stack view'i butonun tamamına yay
+        stackView.isUserInteractionEnabled = false // StackView etkileşimde bulunmasın
         
-        // StackView'i butonun merkezine yerleştirme
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: button.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 30),
-            stackView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -16)
+            stackView.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 30), // Logonun sola olan mesafesi
+            stackView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -25), // Sağ taraftaki boşluk
+            stackView.topAnchor.constraint(equalTo: button.topAnchor), // Yukarıdaki boşluk
+            stackView.bottomAnchor.constraint(equalTo: button.bottomAnchor) // Aşağıdaki boşluk
         ])
 
         // Aksiyon ekleme
-            if let action = action {
-                button.addAction(UIAction { _ in action() }, for: .touchUpInside)
-            }
+        if let action = action {
+            button.addAction(UIAction { _ in action() }, for: .touchUpInside)
+        }
         
         return button
     }
 }
-
-
+ 
