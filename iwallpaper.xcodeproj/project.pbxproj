@@ -20,6 +20,8 @@
 		7A3917ED2CC429F0003DBE40 /* TextfieldMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3917EC2CC429F0003DBE40 /* TextfieldMiddleWare.swift */; };
 		7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */; };
 		7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */; };
+		7ACF02CE2CC472800075C987 /* CheckPasswordUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */; };
+		7ACF02D12CC484670075C987 /* SignUpUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02D02CC484670075C987 /* SignUpUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		7A3917EC2CC429F0003DBE40 /* TextfieldMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldMiddleWare.swift; sourceTree = "<group>"; };
 		7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMiddleWare.swift; sourceTree = "<group>"; };
 		7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMiddleWare.swift; sourceTree = "<group>"; };
+		7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPasswordUI.swift; sourceTree = "<group>"; };
+		7ACF02D02CC484670075C987 /* SignUpUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 		7A3917E42CC4114F003DBE40 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				7ACF02CF2CC4843E0075C987 /* SignUp */,
 				7ACF02CC2CC470F20075C987 /* PreAuth */,
 				7A3917E52CC411FB003DBE40 /* LogIn */,
 			);
@@ -149,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				7A3917E82CC41230003DBE40 /* CheckEmailUI.swift */,
+				7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -201,6 +207,14 @@
 				7A388A002CC28F39007B4FA0 /* PreAuthUI.swift */,
 			);
 			path = PreAuth;
+			sourceTree = "<group>";
+		};
+		7ACF02CF2CC4843E0075C987 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				7ACF02D02CC484670075C987 /* SignUpUI.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,8 +353,10 @@
 				7A3917E92CC41230003DBE40 /* CheckEmailUI.swift in Sources */,
 				7A3889FF2CC28F39007B4FA0 /* SceneDelegate.swift in Sources */,
 				7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */,
+				7ACF02CE2CC472800075C987 /* CheckPasswordUI.swift in Sources */,
 				7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */,
 				7A3917ED2CC429F0003DBE40 /* TextfieldMiddleWare.swift in Sources */,
+				7ACF02D12CC484670075C987 /* SignUpUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

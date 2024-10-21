@@ -23,7 +23,7 @@ class PreAuthUI: UIViewController {
         size: 22,
         color: .black,
         bgColor: .systemPink,
-        cornerRadius: 30,
+        cornerRadius: 10,
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .systemPink,
@@ -38,12 +38,11 @@ class PreAuthUI: UIViewController {
         size: 22,
         color: .white,
         bgColor: .black,
-        cornerRadius: 30,
+        cornerRadius: 10,
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .darkGray,
         autoLayout: false) {
-            
         }
     
     let appleButton = ButtonMiddleWare().createButton(
@@ -53,7 +52,7 @@ class PreAuthUI: UIViewController {
         size: 22,
         color: .white,
         bgColor: .black,
-        cornerRadius: 30,
+        cornerRadius: 10,
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .darkGray,

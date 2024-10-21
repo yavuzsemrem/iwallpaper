@@ -1,26 +1,26 @@
 //
-//  CheckEmailUI.swift
+//  CheckPasswordUI.swift
 //  iwallpaper
 //
-//  Created by Selim on 19.10.2024.
+//  Created by Selim on 20.10.2024.
 //
 
 import UIKit
 import SwiftUI
 
-class CheckEmailUI: UIViewController,UITextFieldDelegate{
-    
+class CheckPasswordUI: UIViewController, UITextFieldDelegate{
+
     let stack = UIStackView()
     
-    let label1 = LabelMiddleWare().createLabel(text: "Email Adress", size: 35, weight: .bold, color: .black, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    let label1 = LabelMiddleWare().createLabel(text: "Enter Your Password", size: 35, weight: .bold, color: .black, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
     
-    let label2 = LabelMiddleWare().createLabel(text: "Your email will be used for log in and registration", size: 20, weight: .medium, color: .black, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    let label2 = LabelMiddleWare().createLabel(text: "Enter your password to continue", size: 20, weight: .medium, color: .black, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
     
-    let textField = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your email :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
+    let textField = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your password :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
     
-    let sendButton = ButtonMiddleWare().createButton(title: "Continue", image: nil, size: 22, color: .black, bgColor: .systemPink, cornerRadius: 10, borderWidth: 2.5, maskToBounds: true, borderColor: .black, autoLayout: false)
+    let sendButton = ButtonMiddleWare().createButton(title: "Continue", image: nil, size: 22, color: .black, bgColor: .systemPink, cornerRadius: 30, borderWidth: 2.5, maskToBounds: true, borderColor: .black, autoLayout: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,26 +98,24 @@ class CheckEmailUI: UIViewController,UITextFieldDelegate{
     {
         view.endEditing(true)
     }
-    
-    
+
+
 }
 
 
-struct CheckEmailUIController_Preview: PreviewProvider {
+struct CheckPasswordUIController_Preview: PreviewProvider {
     static var previews: some View {
-        CheckEmailUIControllerPreview()
+        CheckPasswordUIControllerPreview()
             .edgesIgnoringSafeArea(.all)
     }
 }
 
-struct CheckEmailUIControllerPreview: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> CheckEmailUI {
-        return CheckEmailUI()
+struct CheckPasswordUIControllerPreview: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> CheckPasswordUI {
+        return CheckPasswordUI()
     }
     
-    func updateUIViewController(_ uiViewController: CheckEmailUI, context: Context) {
+    func updateUIViewController(_ uiViewController: CheckPasswordUI, context: Context) {
         
     }
 }
-
-

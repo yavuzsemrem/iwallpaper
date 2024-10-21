@@ -35,7 +35,7 @@ struct TextfieldMiddleWare {
         //borders
         textField.borderStyle = borderStyle
         textField.layer.borderWidth = borderWidth
-        textField.layer.cornerRadius = 10
+        textField.layer.cornerRadius = cornerRadius
         
         
         
