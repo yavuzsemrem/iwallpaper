@@ -27,9 +27,10 @@ class PreAuthUI: UIViewController {
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .systemPink,
-        autoLayout: false) {
-            print("email")
-        }
+        autoLayout: false
+    )
+    
+    
     
     let googleButton = ButtonMiddleWare().createButton(
         title: "Continue with Google",
@@ -42,8 +43,8 @@ class PreAuthUI: UIViewController {
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .darkGray,
-        autoLayout: false) {
-        }
+        autoLayout: false
+    )
     
     let appleButton = ButtonMiddleWare().createButton(
         title: "Continue with Apple",
@@ -56,7 +57,8 @@ class PreAuthUI: UIViewController {
         borderWidth: 2.5,
         maskToBounds: true,
         borderColor: .darkGray,
-        autoLayout: false)
+        autoLayout: false
+    )
     
     
     override func viewDidLoad() {
@@ -79,6 +81,14 @@ class PreAuthUI: UIViewController {
         setupStackView()
         
         setupConstraints()
+        
+        setupButtonActions()
+        
+    }
+    
+    func setupButtonActions(){
+        
+        self.signUpButton.addTarget(self, action: #selector(navigateToCheckEmail), for: .touchUpInside)
         
     }
     
@@ -143,10 +153,15 @@ class PreAuthUI: UIViewController {
         
     }
     
+
     
+    
+    @objc func navigateToCheckEmail(){
+        let checkEmail = CheckEmailUI()
+        navigationController?.pushViewController(checkEmail, animated: true)
+    }
     
 }
-
 
 
 // UIViewController'ın SwiftUI Preview'da gösterilmesi

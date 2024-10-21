@@ -7,9 +7,11 @@
 
 import UIKit
 import SwiftUI
+import FirebaseAuth
 
 class CheckEmailUI: UIViewController,UITextFieldDelegate{
     
+    let errorMW = ErrorMiddleWare()
     let stack = UIStackView()
     
     let label1 = LabelMiddleWare().createLabel(text: "Email Adress", size: 35, weight: .bold, color: .black, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
@@ -46,7 +48,7 @@ class CheckEmailUI: UIViewController,UITextFieldDelegate{
         
         view.backgroundColor = UIColor.white
         //view.backgroundColor = UIColor(hex: "#220138")
-
+        
         stack.axis = .vertical
         stack.distribution = .fillEqually
         stack.spacing = 10
@@ -91,6 +93,8 @@ class CheckEmailUI: UIViewController,UITextFieldDelegate{
             
         ])
         
+        sendButtonClicked()
+        
     }
     
     
@@ -100,7 +104,53 @@ class CheckEmailUI: UIViewController,UITextFieldDelegate{
     }
     
     
+    func sendButtonClicked(){
+        
+        sendButton.addTarget(self, action: #selector(checkUser), for: .touchUpInside)
+        
+    }
+    
+    @objc func checkUser(){
+        
+        guard let email = textField.text, !email.isEmpty else {
+            // Eğer email alanı boşsa kullanıcıya hata göster
+            self.errorMW.createError(_title: "Invalid email", _message: "Please enter a valid email address.") { UIAlertAction in
+                print("Email is empty")
+            }
+            return
+        }
+        
+        Auth.auth().fetchSignInMethods(forEmail: email) { (signInMethods, error) in
+            
+            if let error = error {
+                // Hata mesajını gösteriyoruz
+                self.errorMW.createError(_title: "Something went wrong", _message: error.localizedDescription) { UIAlertAction in
+                    print(error.localizedDescription)
+                }
+            } else {
+                if let methods = signInMethods, !methods.isEmpty {
+                    // Kullanıcı mevcut, şifre doğrulama ekranına geç
+                    let checkPasswordUI = CheckPasswordUI()
+                    
+                    self.navigationController?.pushViewController(checkPasswordUI, animated: true)
+                    
+                } else {
+                    // Kullanıcı bulunamadı, yeni hesap oluşturma ekranına yönlendir
+                    self.errorMW.createError(_title: "No account found", _message: "You need to create an account first.") { action in
+                        
+                        let signUp = SignUpUI()
+                        signUp.emailTextfield.text = self.textField.text
+                        
+                        self.navigationController?.pushViewController(signUp, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
+
 
 
 struct CheckEmailUIController_Preview: PreviewProvider {

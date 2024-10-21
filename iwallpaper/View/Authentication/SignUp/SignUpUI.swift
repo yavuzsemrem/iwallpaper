@@ -7,8 +7,13 @@
 
 import UIKit
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerDelegate & UINavigationControllerDelegate{
+    
+
+    let errorMW = ErrorMiddleWare()
     
     let datePicker = UIDatePicker()
     
@@ -19,11 +24,11 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     
     let label = LabelMiddleWare().createLabel(text: "Public profile image", size: 22, weight: .bold, color: .black, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
-    let emailTextField = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your email :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
+    let birthdayTextfield = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your birthday :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
     
-    let passwordTextField = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your password :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
+    let emailTextfield = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your email :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
     
-    let dateTextField = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your email :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
+    let passwordTextfield = TextfieldMiddleWare().createTextfield(tintColor:.systemPink,placeHolder: "Enter your password :", fontSize: 22, placeHolderColor: "D4ADFC", textColor: "D4ADFC", bgColor: "0C134F", borderColor: "D4ADFC", borderStyle: .none, borderWidth: 2, cornerRadius: 10)
     
     let sendButton = ButtonMiddleWare().createButton(title: "Continue", image: nil, size: 22, color: .black, bgColor: .systemPink, cornerRadius: 10, borderWidth: 2.5, maskToBounds: true, borderColor: .black, autoLayout: false)
     
@@ -48,18 +53,18 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         
         view.backgroundColor = UIColor.white
         
-        view.addSubview(emailTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(dateTextField)
+        view.addSubview(birthdayTextfield)
+        view.addSubview(emailTextfield)
+        view.addSubview(passwordTextfield)
         view.addSubview(sendButton)
         view.addSubview(stack)
         view.addSubview(imageView)
         view.addSubview(label)
         
         
-        stack.addArrangedSubview(emailTextField)
-        stack.addArrangedSubview(passwordTextField)
-        stack.addArrangedSubview(dateTextField)
+        stack.addArrangedSubview(birthdayTextfield)
+        stack.addArrangedSubview(emailTextfield)
+        stack.addArrangedSubview(passwordTextfield)
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 35
@@ -73,9 +78,9 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        dateTextField.delegate = self
+        birthdayTextfield.delegate = self
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
         
         setupConstraints()
         
@@ -129,6 +134,83 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
             
         ])
         
+        sendButtonClicked()
+    }
+    
+    
+    func sendButtonClicked(){
+        
+        sendButton.addTarget(self, action: #selector(navigateToMain), for: .touchUpInside)
+        
+    }
+    
+    
+    @objc func navigateToMain()
+    {
+        Auth.auth().createUser(withEmail: emailTextfield.text ?? "", password: passwordTextfield.text ?? "") { authResult, error in
+            
+            if let error = error {
+                
+                self.errorMW.createError(_title: "Somethink wen't wrong", _message: String(error.localizedDescription)) { action in
+                }
+            }
+            
+            let birthday = self.birthdayTextfield.text
+            
+            let password = self.passwordTextfield.text
+            
+            let image = self.imageView.image
+            
+            guard let user = authResult?.user else {return}
+            
+            self.saveUserToFirestore(id: user.uid, email: user.email!, password: password!, birthday: birthday!,image: image!)
+            
+        }
+    }
+    
+    
+    func saveUserToFirestore(id:String, email:String, password: String, birthday: String,image:UIImage){
+        
+        let db = Firestore.firestore()
+        
+        
+        let imageUrl: () = UploadImage().imageToStorage(image: image) { imageUrl in
+            
+            if let imageUrl = imageUrl {
+                
+                db.collection("User").document(id).setData([
+                    
+                    "id" : id,
+                    "email" : email,
+                    "password" : password,
+                    "birthday" : birthday,
+                    "imageUrl" : imageUrl
+                    
+                ]){error in
+                    
+                    if let error = error {
+                        
+                        self.errorMW.createError(_title: "Somethink wen't wrong", _message: error.localizedDescription) { action in
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    else {
+                        let preAuth = PreAuthUI()
+                        
+                        print("User saved to firestore successfuly")
+                        self.navigationController?.pushViewController(preAuth, animated: true)
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
@@ -136,6 +218,8 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     {
         view.endEditing(true)
     }
+    
+    
     
     @objc func ImageSelection(){
         
@@ -175,17 +259,17 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
                calendarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50) // x: 5 ile biraz içeride duruyor
                
                // Sağ view olarak paddingView'i ekliyoruz
-               emailTextField.rightView = paddingView
-               emailTextField.rightViewMode = .always
+               birthdayTextfield.rightView = paddingView
+               birthdayTextfield.rightViewMode = .always
         }
 
         // DatePicker'ı göstermek için fonksiyon
     // DatePicker'ı göstermek için fonksiyon
         @objc func showDatePicker() {
             // DatePicker'ı textField'ın inputView'ine ekleyelim
-            emailTextField.inputView = datePicker
+            birthdayTextfield.inputView = datePicker
             
-            emailTextField.becomeFirstResponder() // DatePicker'ı açmak için
+            birthdayTextfield.becomeFirstResponder() // DatePicker'ı açmak için
         }
 
         // Tarih değiştiğinde çağrılacak fonksiyon
@@ -196,28 +280,30 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
             dateFormatter.timeStyle = .none
             
             // Seçilen tarihi formatlayıp textField'a yazıyoruz
-            emailTextField.text = dateFormatter.string(from: datePicker.date)
+            birthdayTextfield.text = dateFormatter.string(from: datePicker.date)
         }
     
     
     
 }
+ 
+
     
-    struct SignUpUIController_Preview: PreviewProvider {
-        static var previews: some View {
-            SignUpUIControllerPreview()
-                .edgesIgnoringSafeArea(.all)
-        }
+struct SignUpUIController_Preview: PreviewProvider {
+    static var previews: some View {
+        SignUpUIControllerPreview()
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct SignUpUIControllerPreview: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> SignUpUI {
+        return SignUpUI()
     }
     
-    struct SignUpUIControllerPreview: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> SignUpUI {
-            return SignUpUI()
-        }
+    func updateUIViewController(_ uiViewController: SignUpUI, context: Context) {
         
-        func updateUIViewController(_ uiViewController: SignUpUI, context: Context) {
-            
-        }
     }
-    
+}
+
 
