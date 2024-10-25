@@ -7,9 +7,14 @@
 
 import UIKit
 import SwiftUI
+import FirebaseAuth
 
 class CheckPasswordUI: UIViewController, UITextFieldDelegate {
 
+    var userEmail : String = ""
+    
+    let errorMW = ErrorMiddleWare()
+    
     private let passwordToggleButton = UIButton(type: .custom)
 
     let stack = UIStackView()
@@ -48,10 +53,12 @@ class CheckPasswordUI: UIViewController, UITextFieldDelegate {
         
         textField.delegate = self
         
-        // Şifre görünürlüğünü ayarlayan fonksiyonu burada çağırıyoruz
+        
         setupPasswordField()
         
         setupConstraints()
+        
+        setupButtonClicked()
     }
     
     func setupConstraints() {
@@ -76,40 +83,80 @@ class CheckPasswordUI: UIViewController, UITextFieldDelegate {
         ])
     }
     
+    
+    func setupButtonClicked(){
+        sendButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+    }
+    
+    @objc func buttonClicked(){
+        
+        guard let password = textField.text, !password.isEmpty else {
+            
+            errorMW.createError(_title: "Password is null", _message: "Plase enter a password") { action in
+                print("password is null")
+            }
+            return
+        }
+        
+        
+        Auth.auth().signIn(withEmail: userEmail, password: password) { authResult, error in
+            
+            
+            if let error = error {
+                
+                self.errorMW.createError(_title: "Password is not matched", _message: String(error.localizedDescription)) { action in
+                    print(error.localizedDescription)
+                }
+            }
+            
+            else {
+                
+                let transiation = TransiationMiddleWare().createTransiation()
+                let home = HomeUI()
+                self.view.window?.layer.add(transiation, forKey: kCATransition)
+                home.modalPresentationStyle = .fullScreen
+                self.present(home, animated: false, completion: nil)
+            }
+             
+        }
+        
+        
+        
+    }
+    
     private func setupPasswordField() {
-        // Şifrenin gizlenmesi için başlangıçta `isSecureTextEntry` true olarak ayarlıyoruz
+      
         textField.isSecureTextEntry = true
         
-        // Sağ tarafa eklemek için bir UIButton oluşturuyoruz
+       
         passwordToggleButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         passwordToggleButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .highlighted)
         
-        // Toggle buttonuna basılı tutulduğunda şifreyi göster, bırakınca tekrar gizle
+       
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibilityDown), for: .touchDown)
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibilityUp), for: [.touchUpInside, .touchUpOutside])
         
-        // Sağ tarafta yer alan butonu ayarlıyoruz
+        
         passwordToggleButton.translatesAutoresizingMaskIntoConstraints = false
         textField.rightViewMode = .always
-        textField.rightView = passwordToggleButton // Butonu sağ görünüm olarak ayarlayın
+        textField.rightView = passwordToggleButton
 
-        // Butonun boyutunu ve konumunu ayarlayın
-        passwordToggleButton.widthAnchor.constraint(equalToConstant: 65).isActive = true // Butonun genişliği
-        passwordToggleButton.heightAnchor.constraint(equalToConstant: 65).isActive = true // Butonun yüksekliği
         
-        // Butonun içeriğini 20 birim sola kaydırın
-        passwordToggleButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -20).isActive = true // 20 birim boşluk bırakın
-        passwordToggleButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true // Yükseklik merkezde
+        passwordToggleButton.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        passwordToggleButton.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        
+        
+        passwordToggleButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: -20).isActive = true
+        passwordToggleButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
     }
-    
-    // Şifreyi gösterme işlemi (basılı tutarken)
+   
     @objc private func togglePasswordVisibilityDown() {
-        textField.isSecureTextEntry = false // TextField üzerinden isSecureTextEntry özelliğini ayarlıyoruz
+        textField.isSecureTextEntry = false
     }
     
-    // Şifreyi tekrar gizleme işlemi (butondan el kalkınca)
+
     @objc private func togglePasswordVisibilityUp() {
-        textField.isSecureTextEntry = true // TextField üzerinden isSecureTextEntry özelliğini ayarlıyoruz
+        textField.isSecureTextEntry = true
     }
     
     @objc func hideKeyboard() {

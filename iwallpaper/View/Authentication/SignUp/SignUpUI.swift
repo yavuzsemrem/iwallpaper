@@ -12,7 +12,9 @@ import FirebaseFirestore
 
 class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
-
+    let verificationMW = VerificationCodeMiddleWare()
+    var isUserExist = false
+    
     let errorMW = ErrorMiddleWare()
     
     let datePicker = UIDatePicker()
@@ -20,7 +22,9 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     let stack = UIStackView()
     
     let imageView = UIImageView(image: UIImage(named: "IWP"))
-
+    
+    private let passwordToggleButton = UIButton(type: .custom)
+    
     
     let label = LabelMiddleWare().createLabel(text: "Public profile image", size: 22, weight: .bold, color: .black, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
@@ -71,7 +75,7 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         stack.distribution = .fillEqually
         
         
-    
+        
         imageView.layer.borderWidth = 2.0
         imageView.layer.borderColor = UIColor.yellow.cgColor
         imageView.layer.cornerRadius = 60
@@ -82,15 +86,16 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         emailTextfield.delegate = self
         passwordTextfield.delegate = self
         
-        setupConstraints()
-        
-        
-        addCalendarIconToTextField()
-                
-                // DatePicker ayarları
+       
         datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .inline // İsteğe bağlı
+        datePicker.preferredDatePickerStyle = .inline
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        
+        
+        setupConstraints()
+        setupPasswordField()
+        sendButtonClicked()
+        addCalendarIconToTextField()
         
     }
     
@@ -98,8 +103,8 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     func setupConstraints(){
         
         NSLayoutConstraint.activate([
-        
-        //Stack view
+            
+            //Stack view
             stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             stack.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
@@ -130,11 +135,11 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
             
             label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15)
             
-        
+            
             
         ])
         
-        sendButtonClicked()
+     
     }
     
     
@@ -198,14 +203,18 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
                     
                     
                     else {
-                        let preAuth = PreAuthUI()
+                        
+                        let verifyUserUI = CodeVerificationUI()
+                        var code = self.verificationMW.createCode()
+                        var result = self.verificationMW.sendEmail(email: email, code: code)
+                        verifyUserUI.code = code
+                        verifyUserUI.isUserExist = false
+                        verifyUserUI.userEmail = email
                         
                         print("User saved to firestore successfuly")
-                        self.navigationController?.pushViewController(preAuth, animated: true)
+                        self.navigationController?.pushViewController(verifyUserUI, animated: true)
                         
                     }
-                    
-                    
                 }
                 
             }
@@ -213,6 +222,12 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         }
         
     }
+    
+    
+    
+    
+    
+    
     
     @objc func hideKeyboard()
     {
@@ -239,56 +254,91 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     
     
     
-    // TextField'a sağa calendar iconu eklemek
-        func addCalendarIconToTextField() {
-            let calendarButton = UIButton(type: .custom)
-               
-               // Sistem simgesinin boyutunu artırıyoruz
-               let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
-               let largeCalendarImage = UIImage(systemName: "calendar", withConfiguration: largeConfig)
-               calendarButton.setImage(largeCalendarImage, for: .normal)
-               
-               calendarButton.tintColor = .systemPink
-               calendarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50) // Buton boyutunu artırıyoruz
-               calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
-               
-               // Butonu padding ile sola kaydırıyoruz
-               let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50)) // Genişlik paddingi ayarlıyor
-               paddingView.addSubview(calendarButton)
-               
-               calendarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50) // x: 5 ile biraz içeride duruyor
-               
-               // Sağ view olarak paddingView'i ekliyoruz
-               birthdayTextfield.rightView = paddingView
-               birthdayTextfield.rightViewMode = .always
-        }
-
-        // DatePicker'ı göstermek için fonksiyon
-    // DatePicker'ı göstermek için fonksiyon
-        @objc func showDatePicker() {
-            // DatePicker'ı textField'ın inputView'ine ekleyelim
-            birthdayTextfield.inputView = datePicker
-            
-            birthdayTextfield.becomeFirstResponder() // DatePicker'ı açmak için
-        }
-
-        // Tarih değiştiğinde çağrılacak fonksiyon
-        @objc func dateChanged() {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .none
-            
-            // Seçilen tarihi formatlayıp textField'a yazıyoruz
-            birthdayTextfield.text = dateFormatter.string(from: datePicker.date)
-        }
+    
+    func addCalendarIconToTextField() {
+        let calendarButton = UIButton(type: .custom)
+        
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let largeCalendarImage = UIImage(systemName: "calendar", withConfiguration: largeConfig)
+        calendarButton.setImage(largeCalendarImage, for: .normal)
+        
+        calendarButton.tintColor = .systemPink
+        calendarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        calendarButton.addTarget(self, action: #selector(showDatePicker), for: .touchUpInside)
+        
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+        paddingView.addSubview(calendarButton)
+        
+        calendarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        
+        
+        birthdayTextfield.rightView = paddingView
+        birthdayTextfield.rightViewMode = .always
+    }
+    
+    
+    @objc func showDatePicker() {
+        
+        birthdayTextfield.inputView = datePicker
+        
+        birthdayTextfield.becomeFirstResponder()
+    }
+    
+    
+    @objc func dateChanged() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        
+        birthdayTextfield.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    private func setupPasswordField() {
+        
+        passwordTextfield.isSecureTextEntry = true
+        
+        
+        passwordToggleButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        passwordToggleButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .highlighted)
+        
+        
+        passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibilityDown), for: .touchDown)
+        passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibilityUp), for: [.touchUpInside, .touchUpOutside])
+        
+        
+        passwordToggleButton.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextfield.rightViewMode = .always
+        passwordTextfield.rightView = passwordToggleButton
+        
+        
+        passwordToggleButton.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        passwordToggleButton.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        
+        
+        passwordToggleButton.trailingAnchor.constraint(equalTo: passwordTextfield.trailingAnchor, constant: -20).isActive = true
+        passwordToggleButton.centerYAnchor.constraint(equalTo: passwordTextfield.centerYAnchor).isActive = true
+    }
+    
+    @objc private func togglePasswordVisibilityDown() {
+        passwordTextfield.isSecureTextEntry = false
+    }
+    
+    
+    @objc private func togglePasswordVisibilityUp() {
+        passwordTextfield.isSecureTextEntry = true
+    }
+    
     
     
     
 }
- 
 
-    
+
+
 struct SignUpUIController_Preview: PreviewProvider {
     static var previews: some View {
         SignUpUIControllerPreview()

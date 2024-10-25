@@ -1,7 +1,15 @@
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
+import FirebaseCore
+
 import SwiftUI
 
 class PreAuthUI: UIViewController {
+    
+    let firebaseAuth = FetchUser()
+    
+    let errorMW = ErrorMiddleWare()
     
     let stackView = UIStackView()
     
@@ -46,9 +54,9 @@ class PreAuthUI: UIViewController {
         autoLayout: false
     )
     
-    let appleButton = ButtonMiddleWare().createButton(
-        title: "Continue with Apple",
-        image: UIImage(named: "apple"),
+    let githubButton = ButtonMiddleWare().createButton(
+        title: "Continue with Github",
+        image: UIImage(named: "github"),
         imageSize: CGSize(width: 30, height: 30),
         size: 22,
         color: .white,
@@ -74,10 +82,10 @@ class PreAuthUI: UIViewController {
         view.addSubview(logo)
         view.addSubview(label)
         view.addSubview(signUpButton)
-        //        view.addSubview(emailButton)
         view.addSubview(googleButton)
-        view.addSubview(appleButton)
+        view.addSubview(githubButton)
         view.addSubview(stackView)
+        
         setupStackView()
         
         setupConstraints()
@@ -86,13 +94,123 @@ class PreAuthUI: UIViewController {
         
     }
     
+    
+    //Setup Buttons
     func setupButtonActions(){
         
         self.signUpButton.addTarget(self, action: #selector(navigateToCheckEmail), for: .touchUpInside)
         
+        
+        self.googleButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
+        
+        self.githubButton.addTarget(self, action: #selector(signInWithGitHub), for: .touchUpInside)
+    }
+    
+    //Github sign in button
+    
+    @objc func signInWithGitHub() {
+        let provider = OAuthProvider(providerID: "github.com")
+        provider.scopes = ["user:email"]
+
+        provider.getCredentialWith(nil) { credential, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+
+            guard let credential = credential else { return }
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    print("Firebase sign-in error: \(error.localizedDescription)")
+                    return
+                }
+                // User is signed in
+                if let user = authResult?.user {
+                    print("User signed in: \(user.email ?? "")")
+                    // Proceed to the next screen
+                }
+            }
+        }
+    }
+
+    
+    
+    //Google sign In Button Actions
+    
+    @objc func signInWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+  
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+       
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+            guard error == nil else {
+                return
+            }
+            
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: user.accessToken.tokenString)
+            
+            
+            var email = user.profile?.email
+            
+            
+            firebaseAuth.fetchUser(email: email!) { response in
+                
+                if response == false {
+                    
+                    showSignUpUI(email: user.profile!.email, user: user)
+                    
+                }
+                
+                
+                else {
+                    
+                    navigateToHome()
+                    
+                }
+                
+            }
+        }
     }
     
     
+    //Navigate to Home View
+    private func navigateToHome() {
+        let transition = TransiationMiddleWare().createTransiation()
+        let home = HomeUI()
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        home.modalPresentationStyle = .fullScreen
+        self.present(home, animated: false, completion: nil)
+    }
+    
+    //Navigate to Sign Up View
+    private func showSignUpUI(email: String, user: GIDGoogleUser) {
+        let signUp = SignUpUI()
+        signUp.emailTextfield.text = email
+        
+        
+        DispatchQueue.main.async {
+            if let photoURL = user.profile?.imageURL(withDimension: 200) {
+                if let data = try? Data(contentsOf: photoURL) {
+                    signUp.imageView.image = UIImage(data: data)
+                }
+            }
+        }
+        
+        
+        self.navigationController?.pushViewController(signUp, animated: true)
+    }
+    
+    
+    //Settting up StackView
     func setupStackView() {
         
         let _ : UIStackView = {
@@ -102,9 +220,8 @@ class PreAuthUI: UIViewController {
             stackView.translatesAutoresizingMaskIntoConstraints = false //canceled Auto Layout
             stackView.distribution = .fillEqually
             stackView.addArrangedSubview(signUpButton)
-            //            stackView.addArrangedSubview(emailButton)
             stackView.addArrangedSubview(googleButton)
-            stackView.addArrangedSubview(appleButton)
+            stackView.addArrangedSubview(githubButton)
             
             return stackView
         }()
@@ -112,7 +229,7 @@ class PreAuthUI: UIViewController {
     }
     
     
-    
+    //Setting Constrains
     func setupConstraints(){
         
         //Logo
@@ -153,7 +270,7 @@ class PreAuthUI: UIViewController {
         
     }
     
-
+    
     
     
     @objc func navigateToCheckEmail(){
@@ -164,7 +281,8 @@ class PreAuthUI: UIViewController {
 }
 
 
-// UIViewController'ın SwiftUI Preview'da gösterilmesi
+//Preview
+
 struct MyViewController_Preview: PreviewProvider {
     static var previews: some View {
         ViewControllerPreview()
@@ -172,14 +290,13 @@ struct MyViewController_Preview: PreviewProvider {
     }
 }
 
-// UIViewController'ı SwiftUI Preview'da göstermek için kullanılan yardımcı yapı
 struct ViewControllerPreview: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> PreAuthUI {
         return PreAuthUI()
     }
     
     func updateUIViewController(_ uiViewController: PreAuthUI, context: Context) {
-        // Gerekirse UI güncellemelerini burada yapabilirsin
+      
     }
 }
 
