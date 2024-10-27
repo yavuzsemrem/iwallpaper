@@ -28,7 +28,7 @@ class PreAuthUI: UIViewController {
     
     let label = LabelMiddleWare().createLabel(text: "Millions of Wallpapers. Free on IWallpaper.", size: 35, weight: .bold, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
-    let label2 = LabelMiddleWare().createLabel(text: "Make sure you get all the latest and greatest features first. We'll also keep all your downloads and credits in one place.", size: 18, weight: .regular, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    let label2 = LabelMiddleWare().createLabel(text: "Make sure you get all the latest and greatest features first. We'll also keep all your downloads and credits in one place.", size: 20, weight: .regular, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
     
     let signUpButton = ButtonMiddleWare().createButton(
@@ -192,9 +192,10 @@ class PreAuthUI: UIViewController {
         NSLayoutConstraint.activate([
             
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
-            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -40),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -15),
             logo.widthAnchor.constraint(equalToConstant: 130),
             logo.heightAnchor.constraint(equalToConstant: 130),
+            logo.bottomAnchor.constraint(equalTo: label.topAnchor, constant: 30),
             
         ])
         
@@ -207,6 +208,8 @@ class PreAuthUI: UIViewController {
             label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 0),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            label.bottomAnchor.constraint(equalTo: label2.topAnchor, constant: 0),
+            
             
             
         ])
@@ -216,7 +219,7 @@ class PreAuthUI: UIViewController {
         NSLayoutConstraint.activate([
             
             //label 2
-            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: -20),
+            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
             label2.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -40),
             label2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             label2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
