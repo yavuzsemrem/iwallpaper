@@ -1,11 +1,16 @@
 import UIKit
+import GameKit
+import FirebaseFirestoreInternal
 import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
-
 import SwiftUI
 
 class PreAuthUI: UIViewController {
+    
+    let db = Firestore.firestore()
+    
+    var provider = OAuthProvider(providerID: "github.com")
     
     let firebaseAuth = FetchUser()
     
@@ -21,7 +26,9 @@ class PreAuthUI: UIViewController {
     }()
     
     
-    let label = LabelMiddleWare().createLabel(text: "Millions of Wallpapers. Free on IWallpaper.", size: 35, weight: .bold, color: .white, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    let label = LabelMiddleWare().createLabel(text: "Millions of Wallpapers. Free on IWallpaper.", size: 35, weight: .bold, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    
+    let label2 = LabelMiddleWare().createLabel(text: "Make sure you get all the latest and greatest features first. We'll also keep all your downloads and credits in one place.", size: 18, weight: .regular, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
     
     let signUpButton = ButtonMiddleWare().createButton(
@@ -54,19 +61,7 @@ class PreAuthUI: UIViewController {
         autoLayout: false
     )
     
-    let githubButton = ButtonMiddleWare().createButton(
-        title: "Continue with Github",
-        image: UIImage(named: "github"),
-        imageSize: CGSize(width: 30, height: 30),
-        size: 22,
-        color: .white,
-        bgColor: .black,
-        cornerRadius: 10,
-        borderWidth: 2.5,
-        maskToBounds: true,
-        borderColor: .darkGray,
-        autoLayout: false
-    )
+  
     
     
     override func viewDidLoad() {
@@ -81,9 +76,10 @@ class PreAuthUI: UIViewController {
         view.addSubview(bg)
         view.addSubview(logo)
         view.addSubview(label)
+        view.addSubview(label2)
         view.addSubview(signUpButton)
         view.addSubview(googleButton)
-        view.addSubview(githubButton)
+
         view.addSubview(stackView)
         
         setupStackView()
@@ -100,41 +96,11 @@ class PreAuthUI: UIViewController {
         
         self.signUpButton.addTarget(self, action: #selector(navigateToCheckEmail), for: .touchUpInside)
         
-        
         self.googleButton.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
-        
-        self.githubButton.addTarget(self, action: #selector(signInWithGitHub), for: .touchUpInside)
+ 
     }
     
-    //Github sign in button
-    
-    @objc func signInWithGitHub() {
-        let provider = OAuthProvider(providerID: "github.com")
-        provider.scopes = ["user:email"]
-
-        provider.getCredentialWith(nil) { credential, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                return
-            }
-
-            guard let credential = credential else { return }
-            Auth.auth().signIn(with: credential) { authResult, error in
-                if let error = error {
-                    print("Firebase sign-in error: \(error.localizedDescription)")
-                    return
-                }
-                // User is signed in
-                if let user = authResult?.user {
-                    print("User signed in: \(user.email ?? "")")
-                    // Proceed to the next screen
-                }
-            }
-        }
-    }
-
-    
-    
+  
     //Google sign In Button Actions
     
     @objc func signInWithGoogle() {
@@ -142,7 +108,6 @@ class PreAuthUI: UIViewController {
   
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-        
        
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
             guard error == nil else {
@@ -158,25 +123,17 @@ class PreAuthUI: UIViewController {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
             
-            
             var email = user.profile?.email
-            
             
             firebaseAuth.fetchUser(email: email!) { response in
                 
                 if response == false {
-                    
                     showSignUpUI(email: user.profile!.email, user: user)
-                    
                 }
-                
                 
                 else {
-                    
                     navigateToHome()
-                    
                 }
-                
             }
         }
     }
@@ -210,7 +167,7 @@ class PreAuthUI: UIViewController {
     }
     
     
-    //Settting up StackView
+    //Setting up StackView
     func setupStackView() {
         
         let _ : UIStackView = {
@@ -221,8 +178,7 @@ class PreAuthUI: UIViewController {
             stackView.distribution = .fillEqually
             stackView.addArrangedSubview(signUpButton)
             stackView.addArrangedSubview(googleButton)
-            stackView.addArrangedSubview(githubButton)
-            
+
             return stackView
         }()
         
@@ -236,7 +192,7 @@ class PreAuthUI: UIViewController {
         NSLayoutConstraint.activate([
             
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
-            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -130),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -40),
             logo.widthAnchor.constraint(equalToConstant: 130),
             logo.heightAnchor.constraint(equalToConstant: 130),
             
@@ -248,9 +204,22 @@ class PreAuthUI: UIViewController {
         NSLayoutConstraint.activate([
             
             //label 1
-            label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 0),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            
+        ])
+        
+        //Label2
+        
+        NSLayoutConstraint.activate([
+            
+            //label 2
+            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: -20),
+            label2.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -40),
+            label2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            label2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
             
         ])
@@ -259,10 +228,11 @@ class PreAuthUI: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            stackView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40),
+//            stackView.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 40),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.heightAnchor.constraint(equalToConstant: 235)
+            stackView.heightAnchor.constraint(equalToConstant: 150)
             
             
             

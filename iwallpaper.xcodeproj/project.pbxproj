@@ -28,7 +28,7 @@
 		7A525B532CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A525B522CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift */; };
 		7A9B43B82CC6FBCA00FB1BB6 /* UploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B43B72CC6FBCA00FB1BB6 /* UploadImage.swift */; };
 		7AAC4EBD2CCACCBE00E25CAE /* FetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAC4EBC2CCACCBE00E25CAE /* FetchUser.swift */; };
-		7AAC4EBF2CCBC25600E25CAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AAC4EBE2CCBC25600E25CAE /* GoogleService-Info.plist */; };
+		7AAC4EC92CCDD98100E25CAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AAC4EC82CCDD98100E25CAE /* GoogleService-Info.plist */; };
 		7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */; };
 		7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */; };
 		7ACF02CE2CC472800075C987 /* CheckPasswordUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */; };
@@ -81,7 +81,7 @@
 		7A525B612CCA68E500BD9F07 /* Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		7A9B43B72CC6FBCA00FB1BB6 /* UploadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImage.swift; sourceTree = "<group>"; };
 		7AAC4EBC2CCACCBE00E25CAE /* FetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUser.swift; sourceTree = "<group>"; };
-		7AAC4EBE2CCBC25600E25CAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7AAC4EC82CCDD98100E25CAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7AC0131D2CC308D7001322AC /* ButtonMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMiddleWare.swift; sourceTree = "<group>"; };
 		7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMiddleWare.swift; sourceTree = "<group>"; };
 		7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPasswordUI.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 				7A388A052CC28F3D007B4FA0 /* Assets.xcassets */,
 				7A388A072CC28F3D007B4FA0 /* LaunchScreen.storyboard */,
 				7A388A0A2CC28F3D007B4FA0 /* Info.plist */,
-				7AAC4EBE2CCBC25600E25CAE /* GoogleService-Info.plist */,
+				7AAC4EC82CCDD98100E25CAE /* GoogleService-Info.plist */,
 			);
 			path = iwallpaper;
 			sourceTree = "<group>";
@@ -479,7 +479,7 @@
 			files = (
 				7A388A092CC28F3D007B4FA0 /* LaunchScreen.storyboard in Resources */,
 				7A388A062CC28F3D007B4FA0 /* Assets.xcassets in Resources */,
-				7AAC4EBF2CCBC25600E25CAE /* GoogleService-Info.plist in Resources */,
+				7AAC4EC92CCDD98100E25CAE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

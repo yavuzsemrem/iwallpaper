@@ -13,6 +13,7 @@ import FirebaseFirestore
 class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerDelegate & UINavigationControllerDelegate{
     
     let verificationMW = VerificationCodeMiddleWare()
+    
     var isUserExist = false
     
     let errorMW = ErrorMiddleWare()
@@ -152,25 +153,25 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
     
     @objc func navigateToMain()
     {
-        Auth.auth().createUser(withEmail: emailTextfield.text ?? "", password: passwordTextfield.text ?? "") { authResult, error in
-            
-            if let error = error {
+            Auth.auth().createUser(withEmail: self.emailTextfield.text ?? "", password: self.passwordTextfield.text ?? "") { authResult, error in
                 
-                self.errorMW.createError(_title: "Somethink wen't wrong", _message: String(error.localizedDescription)) { action in
+                if let error = error {
+                    
+                    self.errorMW.createError(_title: "Somethink wen't wrong", _message: String(error.localizedDescription)) { action in
+                    }
                 }
+                
+                let birthday = self.birthdayTextfield.text
+                
+                let password = self.passwordTextfield.text
+                
+                let image = self.imageView.image
+                
+                guard let user = authResult?.user else {return}
+                
+                self.saveUserToFirestore(id: user.uid, email: user.email!, password: password!, birthday: birthday!,image: image!)
+                
             }
-            
-            let birthday = self.birthdayTextfield.text
-            
-            let password = self.passwordTextfield.text
-            
-            let image = self.imageView.image
-            
-            guard let user = authResult?.user else {return}
-            
-            self.saveUserToFirestore(id: user.uid, email: user.email!, password: password!, birthday: birthday!,image: image!)
-            
-        }
     }
     
     
@@ -222,11 +223,6 @@ class SignUpUI: UIViewController, UITextFieldDelegate & UIImagePickerControllerD
         }
         
     }
-    
-    
-    
-    
-    
     
     
     @objc func hideKeyboard()
