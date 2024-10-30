@@ -26,6 +26,9 @@
 		7A525B482CC7BEB800BD9F07 /* TransiationMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A525B472CC7BEB800BD9F07 /* TransiationMiddleWare.swift */; };
 		7A525B502CC9303000BD9F07 /* CodeVerificationUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A525B4F2CC9303000BD9F07 /* CodeVerificationUI.swift */; };
 		7A525B532CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A525B522CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift */; };
+		7A57967C2CCF9CE000097313 /* SettingsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57967B2CCF9CE000097313 /* SettingsUI.swift */; };
+		7A57967E2CCF9CF200097313 /* SearchUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57967D2CCF9CF200097313 /* SearchUI.swift */; };
+		7A5796812CD0669B00097313 /* TabBarControllerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5796802CD0669B00097313 /* TabBarControllerUI.swift */; };
 		7A9B43B82CC6FBCA00FB1BB6 /* UploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B43B72CC6FBCA00FB1BB6 /* UploadImage.swift */; };
 		7AAC4EBD2CCACCBE00E25CAE /* FetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAC4EBC2CCACCBE00E25CAE /* FetchUser.swift */; };
 		7AAC4EC92CCDD98100E25CAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AAC4EC82CCDD98100E25CAE /* GoogleService-Info.plist */; };
@@ -79,6 +82,9 @@
 		7A525B4F2CC9303000BD9F07 /* CodeVerificationUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeVerificationUI.swift; sourceTree = "<group>"; };
 		7A525B522CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeMiddleWare.swift; sourceTree = "<group>"; };
 		7A525B612CCA68E500BD9F07 /* Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
+		7A57967B2CCF9CE000097313 /* SettingsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUI.swift; sourceTree = "<group>"; };
+		7A57967D2CCF9CF200097313 /* SearchUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUI.swift; sourceTree = "<group>"; };
+		7A5796802CD0669B00097313 /* TabBarControllerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerUI.swift; sourceTree = "<group>"; };
 		7A9B43B72CC6FBCA00FB1BB6 /* UploadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImage.swift; sourceTree = "<group>"; };
 		7AAC4EBC2CCACCBE00E25CAE /* FetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUser.swift; sourceTree = "<group>"; };
 		7AAC4EC82CCDD98100E25CAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 			isa = PBXGroup;
 			children = (
 				7A525B442CC7B1D200BD9F07 /* HomeUI.swift */,
+				7A57967B2CCF9CE000097313 /* SettingsUI.swift */,
+				7A57967D2CCF9CF200097313 /* SearchUI.swift */,
 			);
 			path = MainUI;
 			sourceTree = "<group>";
@@ -274,6 +282,14 @@
 			path = MailLibrary;
 			sourceTree = "<group>";
 		};
+		7A57967F2CD0666E00097313 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				7A5796802CD0669B00097313 /* TabBarControllerUI.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		7AAC4EBA2CCABFC300E25CAE /* Verification */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +316,7 @@
 		7AC013182CC3084B001322AC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7A57967F2CD0666E00097313 /* TabBar */,
 				7A525B432CC7B00600BD9F07 /* MainUI */,
 				7A3917E42CC4114F003DBE40 /* Authentication */,
 			);
@@ -612,16 +629,19 @@
 				7A3917EB2CC41278003DBE40 /* LabelMiddleWare.swift in Sources */,
 				7A3917E92CC41230003DBE40 /* CheckEmailUI.swift in Sources */,
 				7A9B43B82CC6FBCA00FB1BB6 /* UploadImage.swift in Sources */,
+				7A5796812CD0669B00097313 /* TabBarControllerUI.swift in Sources */,
 				7A3889FF2CC28F39007B4FA0 /* SceneDelegate.swift in Sources */,
 				7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */,
 				7ACF02CE2CC472800075C987 /* CheckPasswordUI.swift in Sources */,
 				7AC0131E2CC308D7001322AC /* ButtonMiddleWare.swift in Sources */,
 				7A109A9C2CC6B6860078F8EC /* ErrorMiddleWare.swift in Sources */,
 				7A525B482CC7BEB800BD9F07 /* TransiationMiddleWare.swift in Sources */,
+				7A57967C2CCF9CE000097313 /* SettingsUI.swift in Sources */,
 				7A3917ED2CC429F0003DBE40 /* TextfieldMiddleWare.swift in Sources */,
 				7A525B452CC7B1D200BD9F07 /* HomeUI.swift in Sources */,
 				7ACF02D12CC484670075C987 /* SignUpUI.swift in Sources */,
 				7A525B532CC9A80C00BD9F07 /* VerificationCodeMiddleWare.swift in Sources */,
+				7A57967E2CCF9CF200097313 /* SearchUI.swift in Sources */,
 				7A525B502CC9303000BD9F07 /* CodeVerificationUI.swift in Sources */,
 				7AAC4EBD2CCACCBE00E25CAE /* FetchUser.swift in Sources */,
 			);

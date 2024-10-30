@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class CheckPasswordUI: UIViewController, UITextFieldDelegate {
 
+   
+    
     var userEmail : String = ""
     
     let errorMW = ErrorMiddleWare()
@@ -110,19 +112,19 @@ class CheckPasswordUI: UIViewController, UITextFieldDelegate {
             }
             
             else {
-                
                 let transiation = TransiationMiddleWare().createTransiation()
+                let tabbar = TabBarControllerUI()
                 let home = HomeUI()
                 self.view.window?.layer.add(transiation, forKey: kCATransition)
-                home.modalPresentationStyle = .fullScreen
+                tabbar.modalPresentationStyle = .fullScreen
                 self.present(home, animated: false, completion: nil)
             }
-             
         }
         
         
         
     }
+
     
     private func setupPasswordField() {
       
