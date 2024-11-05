@@ -36,6 +36,12 @@
 		7ACF02CB2CC44A980075C987 /* ColorMiddleWare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */; };
 		7ACF02CE2CC472800075C987 /* CheckPasswordUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */; };
 		7ACF02D12CC484670075C987 /* SignUpUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACF02D02CC484670075C987 /* SignUpUI.swift */; };
+		7AF0A52F2CDA2A0400372D73 /* image-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A52A2CDA29E400372D73 /* image-1.png */; };
+		7AF0A5302CDA2A0400372D73 /* image-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A52B2CDA29ED00372D73 /* image-3.png */; };
+		7AF0A5312CDA2A0400372D73 /* image-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A52C2CDA29F400372D73 /* image-2.png */; };
+		7AF0A5322CDA2A0400372D73 /* image-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A52D2CDA29FC00372D73 /* image-4.png */; };
+		7AF0A5332CDA2A0400372D73 /* image-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A52E2CDA2A0400372D73 /* image-5.png */; };
+		7AF0A5352CDA2C6C00372D73 /* email-template.html in Resources */ = {isa = PBXBuildFile; fileRef = 7AF0A5342CDA2C6C00372D73 /* email-template.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +98,12 @@
 		7ACF02CA2CC44A980075C987 /* ColorMiddleWare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMiddleWare.swift; sourceTree = "<group>"; };
 		7ACF02CD2CC472800075C987 /* CheckPasswordUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPasswordUI.swift; sourceTree = "<group>"; };
 		7ACF02D02CC484670075C987 /* SignUpUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUI.swift; sourceTree = "<group>"; };
+		7AF0A52A2CDA29E400372D73 /* image-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-1.png"; sourceTree = "<group>"; };
+		7AF0A52B2CDA29ED00372D73 /* image-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-3.png"; sourceTree = "<group>"; };
+		7AF0A52C2CDA29F400372D73 /* image-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-2.png"; sourceTree = "<group>"; };
+		7AF0A52D2CDA29FC00372D73 /* image-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-4.png"; sourceTree = "<group>"; };
+		7AF0A52E2CDA2A0400372D73 /* image-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-5.png"; sourceTree = "<group>"; };
+		7AF0A5342CDA2C6C00372D73 /* email-template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "email-template.html"; sourceTree = "<group>"; };
 		823A6A67648DBD908F63B310 /* Pods-iwallpaperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iwallpaperTests.release.xcconfig"; path = "Target Support Files/Pods-iwallpaperTests/Pods-iwallpaperTests.release.xcconfig"; sourceTree = "<group>"; };
 		A520C4C5A7F2FF4DE9E5CC6A /* Pods-iwallpaper-iwallpaperUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iwallpaper-iwallpaperUITests.debug.xcconfig"; path = "Target Support Files/Pods-iwallpaper-iwallpaperUITests/Pods-iwallpaper-iwallpaperUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BDF4FEDF4021C439FF948B95 /* Pods-iwallpaper-iwallpaperUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iwallpaper-iwallpaperUITests.release.xcconfig"; path = "Target Support Files/Pods-iwallpaper-iwallpaperUITests/Pods-iwallpaper-iwallpaperUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +289,8 @@
 		7A525B5D2CCA54FA00BD9F07 /* MailLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				7AF0A5342CDA2C6C00372D73 /* email-template.html */,
+				7AF0A5292CDA29C400372D73 /* Images */,
 				7A525B612CCA68E500BD9F07 /* Project-Bridging-Header.h */,
 			);
 			path = MailLibrary;
@@ -367,6 +381,18 @@
 			path = SignUp;
 			sourceTree = "<group>";
 		};
+		7AF0A5292CDA29C400372D73 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7AF0A52A2CDA29E400372D73 /* image-1.png */,
+				7AF0A52C2CDA29F400372D73 /* image-2.png */,
+				7AF0A52B2CDA29ED00372D73 /* image-3.png */,
+				7AF0A52D2CDA29FC00372D73 /* image-4.png */,
+				7AF0A52E2CDA2A0400372D73 /* image-5.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		DB9F37A4135FF19FB7F45CD6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,15 +417,13 @@
 				7A3889F52CC28F39007B4FA0 /* Sources */,
 				7A3889F62CC28F39007B4FA0 /* Frameworks */,
 				7A3889F72CC28F39007B4FA0 /* Resources */,
-				4DF5C9CDE03731A8EAC71300 /* [CP] Embed Pods Frameworks */,
+				1EA94BC33B5E388EDEB85165 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = iwallpaper;
-			packageProductDependencies = (
-			);
 			productName = iwallpaper;
 			productReference = 7A3889F92CC28F39007B4FA0 /* iwallpaper.app */;
 			productType = "com.apple.product-type.application";
@@ -431,7 +455,7 @@
 				7A388A152CC28F3E007B4FA0 /* Sources */,
 				7A388A162CC28F3E007B4FA0 /* Frameworks */,
 				7A388A172CC28F3E007B4FA0 /* Resources */,
-				F01FA1ABF21763D8FF6A7BB0 /* [CP] Embed Pods Frameworks */,
+				F491168DC22E60D8131E5ED6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -476,8 +500,6 @@
 				Base,
 			);
 			mainGroup = 7A3889F02CC28F39007B4FA0;
-			packageReferences = (
-			);
 			productRefGroup = 7A3889FA2CC28F39007B4FA0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -494,9 +516,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF0A52F2CDA2A0400372D73 /* image-1.png in Resources */,
+				7AF0A5352CDA2C6C00372D73 /* email-template.html in Resources */,
+				7AF0A5312CDA2A0400372D73 /* image-2.png in Resources */,
+				7AF0A5322CDA2A0400372D73 /* image-4.png in Resources */,
 				7A388A092CC28F3D007B4FA0 /* LaunchScreen.storyboard in Resources */,
 				7A388A062CC28F3D007B4FA0 /* Assets.xcassets in Resources */,
+				7AF0A5332CDA2A0400372D73 /* image-5.png in Resources */,
 				7AAC4EC92CCDD98100E25CAE /* GoogleService-Info.plist in Resources */,
+				7AF0A5302CDA2A0400372D73 /* image-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +545,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1EA94BC33B5E388EDEB85165 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2B50C429AF9413EB6F8CDF9D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -537,23 +582,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4DF5C9CDE03731A8EAC71300 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iwallpaper/Pods-iwallpaper-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7435F0BEAAC832BBD13071DF /* [CP] Check Pods Manifest.lock */ = {
@@ -600,7 +628,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F01FA1ABF21763D8FF6A7BB0 /* [CP] Embed Pods Frameworks */ = {
+		F491168DC22E60D8131E5ED6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -817,6 +845,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 29VZYNM832;
@@ -834,6 +863,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.s3limm.iwallpaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "iwallpaper/MailLibrary/Project-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

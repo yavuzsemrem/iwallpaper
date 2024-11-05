@@ -20,30 +20,12 @@ class TabBarControllerUI: UITabBarController {
               setupTabBarBackgroundView()
         setupButtonStackView()
               generateControllers()
-        
-//        let home = generateNavigationController(vc: HomeUI(), title: "Home", imageName: "house")
-//        let search = generateNavigationController(vc: SearchUI(), title: "Search", imageName: "magnifyingglass")
-//        let settings = generateNavigationController(vc: SettingsUI(), title: "Settings", imageName: "gear")
-//        
-//                
-//        UINavigationBar.appearance().prefersLargeTitles = true
-//        viewControllers = [home,search,settings]
-     
+
     }
-    
-//    private func generateNavigationController(vc: UIViewController, title : String, imageName: String) -> UINavigationController  {
-//        
-//        vc.navigationItem.title = title
-//        let navController = UINavigationController(rootViewController: vc)
-//        navController.title = title
-//        navController.tabBarItem.image = UIImage(systemName: imageName)
-//        return navController
-//        
-//    }
     
     private func setupTabBarView() {
             view.addSubview(tabBarView)
-            tabBarView.backgroundColor = .systemGray6
+        tabBarView.backgroundColor = .black
             tabBarView.translatesAutoresizingMaskIntoConstraints = false
             tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
      constant: -30).isActive = true
@@ -65,7 +47,7 @@ class TabBarControllerUI: UITabBarController {
             
             tabBarBackgroundView.heightAnchor.constraint(equalTo: tabBarView.heightAnchor, constant: -10).isActive = true
             tabBarBackgroundView.layer.cornerRadius = 25
-            tabBarBackgroundView.backgroundColor = .orange
+            tabBarBackgroundView.backgroundColor = .systemPink
         }
 
         private func setupButtonStackView() {
@@ -78,7 +60,7 @@ class TabBarControllerUI: UITabBarController {
             let searchButton = TabBarButton(image: UIImage(systemName: "magnifyingglass")!)
             searchButton.tag = 1
             let settingsButton = TabBarButton(image: UIImage(systemName: "gearshape.fill")!)
-            settingsButton.tag = 3
+            settingsButton.tag = 2
             
             buttonStackView.addArrangedSubview(homeButton)
             buttonStackView.addArrangedSubview(searchButton)
@@ -125,7 +107,7 @@ class TabBarControllerUI: UITabBarController {
         selectedIndex = sender.tag
 
         for button in buttonStackView.arrangedSubviews {
-            (button as? TabBarButton)?.tintColor = .orange
+            (button as? TabBarButton)?.tintColor = .systemPink
         }
         sender.tintColor = .black
 
@@ -138,7 +120,7 @@ class TabBarButton: UIButton {
     init(image: UIImage) {
         super.init(frame: .zero)
         setImage(image, for: .normal)
-        tintColor = .orange
+        tintColor = .systemPink
     }
 
     required init?(coder: NSCoder) {

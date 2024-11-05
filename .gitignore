@@ -1,0 +1,10 @@
+# Derleme dosyaları
+build/
+DerivedData/
+
+
+# Pod dosyaları
+Pods/
+
+# Yayınlanmamış API anahtarları gibi gizli dosyalar
+*.env

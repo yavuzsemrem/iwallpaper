@@ -13,6 +13,7 @@ pod 'FirebaseStorage'
 pod 'FirebaseDatabase'
 pod 'mailcore2-ios'
 pod 'GoogleSignIn'
+pod 'UnsplashPhotoPicker', '~> 1.3'
 
 
 
