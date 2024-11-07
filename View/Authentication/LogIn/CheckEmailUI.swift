@@ -144,6 +144,7 @@ let verificationWM = VerificationCodeMiddleWare()
                     verifyUserUI.userEmail = email
                     
                     var code = self.verificationWM.createCode()
+                    print(code)
                     
                     self.verificationWM.sendEmail(email: email, code: code)
                     

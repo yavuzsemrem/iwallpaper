@@ -113,16 +113,12 @@ class CheckPasswordUI: UIViewController, UITextFieldDelegate {
             
             else {
                 let transiation = TransiationMiddleWare().createTransiation()
-                let tabbar = TabBarControllerUI()
-                let home = HomeUI()
+                let tabBar = TabBarControllerUI()
                 self.view.window?.layer.add(transiation, forKey: kCATransition)
-                tabbar.modalPresentationStyle = .fullScreen
-                self.present(home, animated: false, completion: nil)
+                tabBar.modalPresentationStyle = .fullScreen
+                self.present(tabBar, animated: false, completion: nil)
             }
         }
-        
-        
-        
     }
 
     
