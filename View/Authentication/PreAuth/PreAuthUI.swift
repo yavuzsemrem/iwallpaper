@@ -10,25 +10,27 @@ class PreAuthUI: UIViewController {
     
     let db = Firestore.firestore()
     
-    var provider = OAuthProvider(providerID: "github.com")
-    
     let firebaseAuth = FetchUser()
     
     let errorMW = ErrorMiddleWare()
+    
+    let overLay = UIView()
     
     let stackView = UIStackView()
     
     let logo : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "IWP"))
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+   
     
-    let label = LabelMiddleWare().createLabel(text: "Millions of Wallpapers. Free on IWallpaper.", size: 35, weight: .bold, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
     
-    let label2 = LabelMiddleWare().createLabel(text: "Make sure you get all the latest and greatest features first. We'll also keep all your downloads and credits in one place.", size: 20, weight: .regular, color: .white, alignment: .left, line: 0, lineBreak: .byWordWrapping, autoLayout: false)
+    let label = LabelMiddleWare().createLabelWidthAutoLayout(text: "Millions of Wallpapers. Free on IWallpaper.", weight: .bold, color: .white, alignment: .center, line: 0, lineBreak: .byWordWrapping, autoLayout: false,screen: UIScreen.main)
+    
+    
     
     
     let signUpButton = ButtonMiddleWare().createButton(
@@ -61,6 +63,21 @@ class PreAuthUI: UIViewController {
         autoLayout: false
     )
     
+    
+    let appleButton = ButtonMiddleWare().createButton(
+        title: "Continue with Apple",
+        image: UIImage(named: "apple"),
+        imageSize: CGSize(width: 30, height: 30),
+        size: 22,
+        color: .white,
+        bgColor: .black,
+        cornerRadius: 10,
+        borderWidth: 2.5,
+        maskToBounds: true,
+        borderColor: .darkGray,
+        autoLayout: false
+    )
+    
   
     
     
@@ -72,14 +89,21 @@ class PreAuthUI: UIViewController {
         bg.contentMode = .scaleAspectFill
         
         
-        view.backgroundColor = .white
+        overLay.backgroundColor = .black
+        overLay.alpha = 0.5
+        overLay.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.backgroundColor = .blue
         view.addSubview(bg)
+        view.addSubview(overLay)
         view.addSubview(logo)
         view.addSubview(label)
-        view.addSubview(label2)
         view.addSubview(signUpButton)
         view.addSubview(googleButton)
+        view.addSubview(appleButton)
 
+        
+        
         view.addSubview(stackView)
         
         setupStackView()
@@ -87,6 +111,9 @@ class PreAuthUI: UIViewController {
         setupConstraints()
         
         setupButtonActions()
+        
+        setupGradientLayer() // Gradient Layer'i eklemek için fonksiyonu çağırıyoruz
+
         
     }
     
@@ -178,6 +205,7 @@ class PreAuthUI: UIViewController {
             stackView.distribution = .fillEqually
             stackView.addArrangedSubview(signUpButton)
             stackView.addArrangedSubview(googleButton)
+            stackView.addArrangedSubview(appleButton)
 
             return stackView
         }()
@@ -188,15 +216,21 @@ class PreAuthUI: UIViewController {
     //Setting Constrains
     func setupConstraints(){
         
+        
+        //Layer
+        NSLayoutConstraint.activate([
+            overLay.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            overLay.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            overLay.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            overLay.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6)
+        ])
+        
+        
         //Logo
         NSLayoutConstraint.activate([
-            
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor,constant: 0),
-            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -15),
-            logo.widthAnchor.constraint(equalToConstant: 130),
-            logo.heightAnchor.constraint(equalToConstant: 130),
-            logo.bottomAnchor.constraint(equalTo: label.topAnchor, constant: 30),
-            
+            logo.widthAnchor.constraint(equalToConstant: 230),
+            logo.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         
@@ -204,41 +238,21 @@ class PreAuthUI: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            //label 1
-            label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 0),
+            label.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            label.bottomAnchor.constraint(equalTo: label2.topAnchor, constant: 0),
-            
-            
-            
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
-        //Label2
-        
-        NSLayoutConstraint.activate([
-            
-            //label 2
-            label2.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
-            label2.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -40),
-            label2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            label2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            
-        ])
         
         //Buttons StackView
         
         NSLayoutConstraint.activate([
             
-//            stackView.topAnchor.constraint(equalTo: label2.bottomAnchor, constant: 40),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.heightAnchor.constraint(equalToConstant: 150)
-            
-            
-            
+            stackView.heightAnchor.constraint(equalToConstant: 235)
         ])
         
     }
@@ -250,6 +264,32 @@ class PreAuthUI: UIViewController {
         let checkEmail = CheckEmailUI()
         navigationController?.pushViewController(checkEmail, animated: true)
     }
+    
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = overLay.bounds
+        gradientLayer.colors = [
+            UIColor.black.withAlphaComponent(1.0).cgColor, // Aşağıda opak
+            UIColor.black.withAlphaComponent(0.0).cgColor  // Yukarıda transparan
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0) // Aşağıda başla
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)   // Yukarıda bitir
+        overLay.layer.addSublayer(gradientLayer)
+    }
+
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // overLay'in boyutu değiştikçe gradientLayer'in de boyutunu güncelliyoruz
+        overLay.layer.sublayers?.forEach { sublayer in
+            if let gradientLayer = sublayer as? CAGradientLayer {
+                gradientLayer.frame = overLay.bounds
+            }
+        }
+    }
+
+    
     
 }
 
